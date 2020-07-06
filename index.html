@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="RU">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<title>Document</title>
+	<style>
+		.circle {
+			width: 80px;
+			height: 80px;
+			border-radius: 50%;
+			border: 2px solid #000;
+			margin: 40px;
+			display: inline-block;
+		}
+		.blue {
+			background: blue;
+		}
+		.green: {
+			background: green;
+		}
+		.red {
+			background: red;
+		}
+		* {
+			outline: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+		<div id="app">
+			<input type="text" @keyup.enter="alertValue">
+			<hr>
+			<h2>
+				<a :href="url">Google</a>
+			</h2>
+			<hr>
+			<h2>
+				Счетчик: {{ counter }}
+			</h2>
+			<button @click="counter++">Кнопка</button>
+			<hr>
+			<input type="text" v-model="text">
+			<h2> {{text}} </h2>
+			<hr>
+			<br>
+			<hr>
+			<div class="circle" @click="isActive = !isActive" :class="{'red': isActive, 'blue': !isActive}"></div>
+			<div class="circle" :class="[{'red': !isActive}, color]"></div>
+			<input type="text" v-model="color">
+			<hr>
+			<br>
+			<hr>
+			<div class="circle" @click="isActive = !isActive" :class="newClass"></div>
+		</div>
+	</div>
+	<script>
+		var app = new Vue({
+			el: '#app',
+			data: {
+				url: 'https://google.com',
+				counter: 0,
+				text: 'asd',
+				isActive: false,
+				color: 'blue'
+			},
+			computed: {
+				newClass: function() {
+					return {
+						'red': this.isActive,
+						'blue': !this.isActive
+					}
+				}
+			},
+			methods: {
+				alertValue: function(event) {
+					alert(event.target.value);
+				}
+			}
+		})
+	</script>
+</body>
+</html>
